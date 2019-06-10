@@ -1,0 +1,1 @@
+export const WHITESPACES = [" ", "\n", "\r", "  "];
