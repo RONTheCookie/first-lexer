@@ -19,7 +19,7 @@ class Lexer {
         this.data = data;
     }
     public process(): Token[] {
-        while (this.index >= this.data.length - 1) {
+        while (this.index <= this.data.length - 1) {
             this.findNextToken();
         }
         return this.tokens;
@@ -46,11 +46,19 @@ class Lexer {
 
         const token = new Token(this.currentChar, this.index); // type UNKNOWN
         
-        if (PLUS.regex.test(this.data.substring(this.index))) {
-            token.type = TokenType.PLUS;
-        }
+        this.matchExp(PLUS.regex, this.data.substring(this.index))
+            // token.type = TokenType.PLUS;
+        // }
+        
 
         this.tokens.push(token);
     }
+    private matchExp(regex: RegExp, data: string) {
+        const res = data.match(regex);
+        if (!res) return;
+        if (res.index !== 0) return;
+        // this.skip(res[0].length);
+        return res[0];
+    }
 }
-module.exports = Lexer;
+export default Lexer;
