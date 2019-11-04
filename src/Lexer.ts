@@ -8,7 +8,7 @@ export default class Lexer {
         this.tokens = [];
         this.currentToken = new Token(data, 0);
     }
-    lex() {
+    lex(): Token[] {
         while (this.pos <= this.data.length - 1) {
             console.log(">text:" + this.data);
             console.log("      " + " ".repeat(this.pos) + `^ (pos = ${this.pos})`);
@@ -25,6 +25,7 @@ export default class Lexer {
             console.log(">next\n");
 		}
 		console.log(">done!!", this, this.tokens.map(t => t.str));
+		return this.tokens;
     }
 
     readSkipToken(type: TokenType) {
